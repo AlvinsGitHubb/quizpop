@@ -15,7 +15,7 @@ import lombok.Data;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Integer id;
     private String questionTitle;// the title for this column in psql is question_title, but the JPA will take

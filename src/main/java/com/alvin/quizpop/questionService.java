@@ -24,7 +24,7 @@ public class questionService {
 
     public String addQuestion(@RequestBody Question question) {
         questionDao.save(question);
-        return "success";
+        return "success"; // this gets printed in postman
     }
 
 }
