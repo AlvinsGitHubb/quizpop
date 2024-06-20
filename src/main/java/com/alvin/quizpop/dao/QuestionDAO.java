@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.alvin.quizpop.Question;
 
 @Repository
-// <Classname, Parameter Key type>
-public interface QuestionDAO extends JpaRepository<Question, Integer> {
+public interface QuestionDAO extends JpaRepository<Question, Integer> {// <Classname, Parameter Key type>
     List<Question> findByCategory(String category);
 
     @Query(value = "SELECT * FROM question q Where q.category=:category ORDER BY RANDOM() LIMIT :numQ", nativeQuery = true)

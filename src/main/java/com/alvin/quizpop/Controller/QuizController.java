@@ -2,6 +2,7 @@ package com.alvin.quizpop.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,8 @@ import com.alvin.quizpop.Service.QuizService;
 @RequestMapping("quiz")
 public class QuizController {
 
-    QuizService quizService;
+    @Autowired
+    private QuizService quizService;
 
     @PostMapping("create")
     public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam int numQ,

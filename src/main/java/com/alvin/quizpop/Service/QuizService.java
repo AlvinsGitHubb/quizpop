@@ -30,9 +30,10 @@ public class QuizService {
 
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
 
+        // where questions from db is stored
         List<Question> questions = questionDao.findRandomQuestionsByCategory(category, numQ);
 
-        Quiz quiz = new Quiz();
+        Quiz quiz = new Quiz(); // quiz creation
         quiz.setTitle(title);
         quiz.setQuestions(questions);
         quizDao.save(quiz);
