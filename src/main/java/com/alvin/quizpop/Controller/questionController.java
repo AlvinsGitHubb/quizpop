@@ -3,7 +3,7 @@
  * this layer accepts requests from user
  * http://localhost:8080/question/allQuestions - paste this link to browser to see shit (connect to psql question db)
  */
-package com.alvin.quizpop;
+package com.alvin.quizpop.Controller;
 
 import java.util.List;
 
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alvin.quizpop.Question;
+import com.alvin.quizpop.Service.questionService;
 
 @RestController // waits for a request
 /*

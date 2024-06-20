@@ -1,4 +1,4 @@
-package com.alvin.quizpop;
+package com.alvin.quizpop.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.alvin.quizpop.Question;
 import com.alvin.quizpop.dao.QuestionDAO;
 
 @Service
@@ -43,7 +44,7 @@ public class questionService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        return new ResponseEntity<>("success", HttpStatus.CREATED); // status 201
 
     }
 
