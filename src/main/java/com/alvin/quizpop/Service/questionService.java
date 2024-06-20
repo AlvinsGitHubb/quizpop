@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.alvin.quizpop.Question;
 import com.alvin.quizpop.dao.QuestionDAO;
@@ -38,7 +37,7 @@ public class questionService {
                                                                                // arrayList
     }
 
-    public ResponseEntity<String> addQuestion(@RequestBody Question question) {
+    public ResponseEntity<String> addQuestion(Question question) {
         try {
             questionDao.save(question);
         } catch (Exception e) {
