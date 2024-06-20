@@ -1,3 +1,6 @@
+/*
+ * This is created so we can show user all information except the right answer for quiz
+ */
 package com.alvin.quizpop;
 
 import lombok.Data;
