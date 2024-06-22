@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +31,25 @@ public class QuizService {
     @Autowired
     QuestionDAO questionDao;
 
+    private static final Logger logger = LoggerFactory.getLogger(QuizService.class);
+
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
 
         // where questions from db is stored
-        List<Question> questions = questionDao.findRandomQuestionsByCategory(category, numQ);
+        // List<Question> questions =
+        // questionDao.findRandomQuestionsByCategory(category, numQ);
+        List<Question> questions = questionDao.findRandomQuestionsByCategoryWithLogging(category, numQ);
+
+        // Log the fetched questions
+        logger.info("Fetched Questions: {}", questions);
 
         Quiz quiz = new Quiz(); // quiz creation
         quiz.setTitle(title);
         quiz.setQuestions(questions);
+
+        // Log the quiz object before saving
+        logger.info("Quiz before saving: {}", quiz);
+
         quizDao.save(quiz);
 
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
