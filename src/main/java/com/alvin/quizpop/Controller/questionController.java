@@ -1,7 +1,7 @@
 /*
  * Controller layer
  * this layer accepts requests from user
- * http://localhost:8080/question/allQuestions - paste this link to browser to see shit (connect to psql question db)
+ * http://localhost:8080/question/allQuestions - paste this link to browser to see all questions (connect to psql question db)
  */
 package com.alvin.quizpop.Controller;
 
@@ -44,7 +44,8 @@ public class questionController {
     // new one uses response entity instead of list
     // the point of a response entity is to see the status of the request we make
     // from postman
-    // ex. status 200 - good, status 100- bad, status 300- idek
+    // ex. status 200 - good, status 100- bad, status 300- not good,status 500 -
+    // means code is bad
     @GetMapping("allQuestions") // retrieves all questions under the questions table
     public ResponseEntity<List<Question>> getAllQuestions() {
 

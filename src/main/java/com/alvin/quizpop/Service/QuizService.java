@@ -36,7 +36,7 @@ public class QuizService {
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
 
         // where questions from db is stored
-        // List<Question> questions =
+        // List<Question> questions = the list of random questions for the quiz
         // questionDao.findRandomQuestionsByCategory(category, numQ);
         List<Question> questions = questionDao.findRandomQuestionsByCategoryWithLogging(category, numQ);
 
@@ -70,6 +70,7 @@ public class QuizService {
 
     }
 
+    // used for the submit method
     public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
         Quiz quiz = quizDao.findById(id).get();
         List<Question> questions = quiz.getQuestions();
