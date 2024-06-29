@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,17 +33,6 @@ public class questionController {
     @Autowired
     questionService questionService; // instantiate questionService object
 
-    /*
-     * Old allQuestions
-     * 
-     * @GetMapping("allQuestions") // retrieves all questions under the questions
-     * table
-     * public List<Question> getAllQuestions() {
-     * return new ResponseEntity<>(questionService.getAllQuestions(),HttpStatus.OK);
-     * }
-     */
-
-    // new one uses response entity instead of list
     // the point of a response entity is to see the status of the request we make
     // from postman
     // ex. status 200 - good, status 100- bad, status 300- not good,status 500 -
@@ -70,6 +60,19 @@ public class questionController {
 
     }
 
+    /*
+     * Updating questions
+     * ex. http://localhost:8080/question/1 (this gets question id 1)
+     * need to be in postman and put this in body while being in put mode:
+     * {
+     * "questionTitle": "What is a class in Java?",
+     * "option1": "A func", //the changed part
+     * "option2": "An object",
+     * "option3": "A data structure",
+     * "option4": "A loop",
+     * "rightAnswer": "An object"
+     * }
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Question> updateQuestion(@PathVariable Integer id, @RequestBody Question questionDetails) {
         Question updatedQuestion = questionService.updateQuestion(id, questionDetails);
@@ -78,6 +81,16 @@ public class questionController {
         }
         return ResponseEntity.ok(updatedQuestion);
 
+    }
+
+    // Delete a question
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteQuestion(@PathVariable Integer id) {
+        boolean isDeleted = questionService.deleteQuestion(id);
+        if (!isDeleted) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }
