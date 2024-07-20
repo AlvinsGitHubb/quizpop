@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import QuestionList from './components/QuestionList';
 import CreateQuestion from './components/CreateQuestion';
 import UpdateQuestion from './components/UpdateQuestion';
@@ -9,11 +9,11 @@ function App() {
     <Router>
       <div className="container">
         <h2 className="text-center">Quiz Application</h2>
-        <Switch>
-          <Route path="/" exact component={QuestionList} />
-          <Route path="/add" component={CreateQuestion} />
-          <Route path="/edit/:id" component={UpdateQuestion} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<QuestionList />} />
+          <Route path="/add" element={<CreateQuestion />} />
+          <Route path="/edit/:id" element={<UpdateQuestion />} />
+        </Routes>
       </div>
     </Router>
   );
