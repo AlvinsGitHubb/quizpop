@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import QuestionList from './components/QuestionList';
+import CreateQuestion from './components/CreateQuestion';
+import UpdateQuestion from './components/UpdateQuestion';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+        <h2 className="text-center">Quiz Application</h2>
+        <Switch>
+          <Route path="/" exact component={QuestionList} />
+          <Route path="/add" component={CreateQuestion} />
+          <Route path="/edit/:id" component={UpdateQuestion} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
