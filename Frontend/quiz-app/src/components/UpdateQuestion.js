@@ -11,7 +11,7 @@ const UpdateQuestion = (props) => {
   const { id } = props.match.params;
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/questions/${id}`)
+    axios.get(`http://localhost:8080/question/${id}`)
       .then(response => setQuestion(response.data))
       .catch(error => console.error('There was an error fetching the question!', error));
   }, [id]);
@@ -24,7 +24,7 @@ const UpdateQuestion = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.put(`http://localhost:8080/questions/${id}`, question)
+    axios.put(`http://localhost:8080/question/${id}`, question)
       .then(response => {
         props.history.push('/');
       })

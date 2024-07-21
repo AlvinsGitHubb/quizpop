@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import QuestionList from './components/QuestionList';
 import CreateQuestion from './components/CreateQuestion';
 import UpdateQuestion from './components/UpdateQuestion';
+import './App.css';
 
 function App() {
   return (

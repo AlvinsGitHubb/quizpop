@@ -15,7 +15,7 @@ const CreateQuestion = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const question = { questionText, options, answer };
-    axios.post('http://localhost:8080/questions', question)
+    axios.post('http://localhost:8080/question/add', question)
       .then(response => {
         props.history.push('/');
       })
