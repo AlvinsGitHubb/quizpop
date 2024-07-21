@@ -56,6 +56,22 @@ public class questionController {
         return questionService.getQuestionByCategory(category);
     }
 
+    /*
+     * add question (id will be auto generated)
+     * ex. http://localhost:8080/question/add
+     * use POST and enter info in body and raw format in postman
+     * {
+     * "questionTitle": "Max value byte for java?",
+     * "option1": "100",
+     * "option2": "127",
+     * "option3": "48",
+     * "option4": "999",
+     * "rightAnswer": "127",
+     * "difficultyLevel": "Easy",
+     * "category": "java"
+     * }
+     * 
+     */
     @PostMapping("add")
     public ResponseEntity<String> addQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
