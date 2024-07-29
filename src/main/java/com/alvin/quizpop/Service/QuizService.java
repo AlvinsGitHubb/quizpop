@@ -33,11 +33,9 @@ public class QuizService {
 
     private static final Logger logger = LoggerFactory.getLogger(QuizService.class);
 
-    public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
+    public ResponseEntity<Integer> createQuiz(String category, int numQ, String title) {
 
-        // where questions from db is stored
-        // List<Question> questions = the list of random questions for the quiz
-        // questionDao.findRandomQuestionsByCategory(category, numQ);
+        // Fetch random questions from the database
         List<Question> questions = questionDao.findRandomQuestionsByCategoryWithLogging(category, numQ);
 
         // Log the fetched questions
@@ -50,14 +48,17 @@ public class QuizService {
         // Log the quiz object before saving
         logger.info("Quiz before saving: {}", quiz);
 
-        quizDao.save(quiz);
+        Quiz savedQuiz = quizDao.save(quiz);
 
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
-
+        // Return the ID of the saved quiz
+        return new ResponseEntity<>(savedQuiz.getId(), HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
         Optional<Quiz> quiz = quizDao.findById(id); // optional is used because the data may or may not come
+        if (!quiz.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         List<Question> questionsFromDB = quiz.get().getQuestions();
         List<QuestionWrapper> questionsForUser = new ArrayList<>(); // fill questionForUser with database information
         for (Question q : questionsFromDB) {
@@ -67,7 +68,6 @@ public class QuizService {
         }
 
         return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
-
     }
 
     // used for the submit method
