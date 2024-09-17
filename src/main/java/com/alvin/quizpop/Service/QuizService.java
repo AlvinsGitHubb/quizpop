@@ -36,7 +36,7 @@ public class QuizService {
     public ResponseEntity<Integer> createQuiz(String category, int numQ, String title) {
 
         // Fetch random questions from the database
-        List<Question> questions = questionDao.findRandomQuestionsByCategoryWithLogging(category, numQ);
+        List<Question> questions = questionDao.findRandomQuestionsByCategory(category, numQ);
 
         // Log the fetched questions
         logger.info("Fetched Questions: {}", questions);

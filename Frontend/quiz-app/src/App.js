@@ -18,9 +18,9 @@ function App() {
             <Route path="/" element={<QuestionList />} />
             <Route path="/add" element={<CreateQuestion />} />
             <Route path="/edit/:id" element={<UpdateQuestion />} />
-            <Route path="/quiz/:id" element={<Quiz />} />
+            <Route path="/quiz" element={<Quiz />} />
           </Routes>
-          <Link to="/quiz/1" className="btn btn-primary">Start Quiz</Link> {/* Adjust quiz ID as needed */}
+          <Link to="/quiz" className="btn btn-primary">Start Quiz</Link>
         </div>
       </div>
     </Router>
