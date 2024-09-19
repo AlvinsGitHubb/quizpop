@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // For navigation
 
 const Quiz = () => {
   const [category, setCategory] = useState('');
@@ -56,6 +57,7 @@ const Quiz = () => {
   return (
     <div>
       {questions.length === 0 ? (
+        // Render the "Start Quiz" form only once
         <form onSubmit={handleCreateQuiz}>
           <div className="form-group">
             <label>Category</label>
@@ -84,6 +86,7 @@ const Quiz = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+          {/* Only one "Start Quiz" button */}
           <button type="submit" className="btn btn-primary">Start Quiz</button>
         </form>
       ) : (
@@ -112,6 +115,10 @@ const Quiz = () => {
           </form>
         </div>
       )}
+
+      {/* "Back to Home" button */}
+      <Link to="/" className="btn btn-secondary">Home</Link>
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
