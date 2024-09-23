@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'; // For navigation
 
 const Quiz = () => {
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(''); // Initially empty
   const [numQ, setNumQ] = useState('');
   const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState([]);
@@ -57,16 +57,19 @@ const Quiz = () => {
   return (
     <div>
       {questions.length === 0 ? (
-        // Render the "Start Quiz" form only once
+        // Only one "Start Quiz" button should be here
         <form onSubmit={handleCreateQuiz}>
           <div className="form-group">
             <label>Category</label>
-            <input
-              type="text"
+            <select
               className="form-control"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            />
+            >
+              <option value="">Select a category</option>
+              <option value="java">java</option>
+              <option value="python">python</option>
+            </select>
           </div>
           <div className="form-group">
             <label>Number of Questions</label>
@@ -86,7 +89,6 @@ const Quiz = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          {/* Only one "Start Quiz" button */}
           <button type="submit" className="btn btn-primary">Start Quiz</button>
         </form>
       ) : (
@@ -117,7 +119,7 @@ const Quiz = () => {
       )}
 
       {/* "Back to Home" button */}
-      <Link to="/" className="btn btn-secondary">Home</Link>
+      <Link to="/" className="btn btn-secondary">Back to Home</Link>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
