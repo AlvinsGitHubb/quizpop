@@ -33,16 +33,17 @@ This is a Quiz Application. You are able to view the list of questions, add/edit
 
 3. Ensure all technologies and frameworks  are installed
 
-4. Run the project from the backend
+4. Change the database settings to what you have installed (e.g. password, username, etc.)
 
-5. Start a new terminal
+5. Run the project from the backend
 
-6. change the directory to quiz-app
-* cd Frontend, cd quiz-app
+6. Start a new terminal
 
-7. npm start
+7. Change the directory to quiz-app (cd Frontend, cd quiz-app)
 
-8. Go to localhost:3000 to view the site
+8. Start npm (npm start)
+
+9. Go to localhost:3000 to view the site
 
 
 
