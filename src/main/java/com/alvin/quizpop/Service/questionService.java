@@ -51,6 +51,7 @@ public class questionService {
     public Optional<Question> getQuestionById(Integer id) {
         return questionDao.findById(id);
     }
+    
 
     public Question updateQuestion(Integer id, Question questionDetails) {
         Optional<Question> questionOptional = questionDao.findById(id);
@@ -77,5 +78,7 @@ public class questionService {
         questionDao.deleteById(id);
         return true;
     }
+
+    
 
 }

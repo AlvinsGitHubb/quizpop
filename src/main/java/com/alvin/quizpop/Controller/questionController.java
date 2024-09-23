@@ -6,6 +6,7 @@
 package com.alvin.quizpop.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,6 +78,18 @@ public class questionController {
         return questionService.addQuestion(question);
 
     }
+
+    @GetMapping("/{id}")
+public ResponseEntity<Question> getQuestionById(@PathVariable Integer id) {
+    Optional<Question> question = questionService.getQuestionById(id);
+    if (question.isPresent()) {
+        return ResponseEntity.ok(question.get());
+    } else {
+        return ResponseEntity.notFound().build();  // Return 404 if not found
+    }
+}
+
+
 
     /*
      * Updating questions

@@ -1,56 +1,134 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // For navigation
 
-const UpdateQuestion = (props) => {
+const UpdateQuestion = () => {
+  const { id } = useParams();  // Extract the question ID from the URL
   const [question, setQuestion] = useState({
-    questionText: '',
-    options: ['', '', '', ''],
-    answer: ''
+    questionTitle: '',
+    option1: '',
+    option2: '',
+    option3: '',
+    option4: '',
+    rightAnswer: ''
   });
-
-  const { id } = props.match.params;
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Fetch the question by ID from the backend
     axios.get(`http://localhost:8080/question/${id}`)
-      .then(response => setQuestion(response.data))
-      .catch(error => console.error('There was an error fetching the question!', error));
+      .then(response => {
+        setQuestion(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching question:', error);
+        setError(error);
+        setLoading(false);
+      });
   }, [id]);
 
-  const handleOptionChange = (index, value) => {
-    const newOptions = [...question.options];
-    newOptions[index] = value;
-    setQuestion({ ...question, options: newOptions });
+  // Handle input changes to update the question object state
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setQuestion(prevQuestion => ({
+      ...prevQuestion,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     axios.put(`http://localhost:8080/question/${id}`, question)
       .then(response => {
-        props.history.push('/');
+        alert('Question updated successfully!');
       })
-      .catch(error => console.error('There was an error updating the question!', error));
+      .catch(error => {
+        console.error('Error updating question:', error);
+      });
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      <h3>Update Question</h3>
+      <h2>Edit Question</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Question Text:</label>
-          <input type="text" className="form-control" value={question.questionText} onChange={e => setQuestion({ ...question, questionText: e.target.value })} />
+        <div>
+          <label>
+            Question Title:
+            <input
+              type="text"
+              name="questionTitle"
+              value={question.questionTitle}
+              onChange={handleInputChange}
+            />
+          </label>
         </div>
-        {question.options.map((option, index) => (
-          <div key={index} className="form-group">
-            <label>Option {index + 1}:</label>
-            <input type="text" className="form-control" value={option} onChange={e => handleOptionChange(index, e.target.value)} />
-          </div>
-        ))}
-        <div className="form-group">
-          <label>Answer:</label>
-          <input type="text" className="form-control" value={question.answer} onChange={e => setQuestion({ ...question, answer: e.target.value })} />
+        <div>
+          <label>
+            Option 1:
+            <input
+              type="text"
+              name="option1"
+              value={question.option1}
+              onChange={handleInputChange}
+            />
+          </label>
         </div>
-        <button type="submit" className="btn btn-primary">Update</button>
+        <div>
+          <label>
+            Option 2:
+            <input
+              type="text"
+              name="option2"
+              value={question.option2}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Option 3:
+            <input
+              type="text"
+              name="option3"
+              value={question.option3}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Option 4:
+            <input
+              type="text"
+              name="option4"
+              value={question.option4}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Right Answer:
+            <input
+              type="text"
+              name="rightAnswer"
+              value={question.rightAnswer}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <button type="submit">Update Question</button>
       </form>
+      {/* "Back to Home" button */}
+      <Link to="/" className="btn btn-secondary">Home</Link>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };
