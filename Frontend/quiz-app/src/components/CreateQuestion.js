@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const CreateQuestion = () => {
   const [questionTitle, setQuestionTitle] = useState('');
@@ -75,6 +76,7 @@ const CreateQuestion = () => {
         </div>
         <button type="submit" className="btn btn-primary">Add Question</button>
       </form>
+      <Link to="/" className="btn btn-secondary">Home</Link>
     </div>
   );
 };

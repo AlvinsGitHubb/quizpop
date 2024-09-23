@@ -119,7 +119,7 @@ const Quiz = () => {
       )}
 
       {/* "Back to Home" button */}
-      <Link to="/" className="btn btn-secondary">Back to Home</Link>
+      <Link to="/" className="btn btn-secondary">Home</Link>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
